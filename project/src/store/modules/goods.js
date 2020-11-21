@@ -52,6 +52,12 @@ const actions = {
       if (res.data.code == 200) {
         //提交一个mutations
         context.commit("REQ_GOODSLIST", res.data.list);
+        // 重新执行函数
+        if (context.state.page != 0 && res.data.list == null) {
+          context.dispatch('changePageAction', context.state.page - 1);
+          context.dispatch('getGoodsListAction');
+          return
+        }
       }
     });
   },

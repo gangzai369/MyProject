@@ -33,11 +33,11 @@
             list-type="picture-card"
             :on-preview="onPreview"
             :on-remove="onRemove"
-            :auto-upload="false"
             :on-change="onChange"
+            :on-exceed='onExceed'
+            :auto-upload="false"
             :file-list="fileList"
             :limit='1'
-            :on-exceed='onExceed'	
           >
             <i class="el-icon-plus"></i>
           </el-upload>
@@ -129,10 +129,10 @@ export default {
       this.form = {
         pid: 0, //上级分类编号 默认是0 是顶级
         catename: "", //商品分类名称
-        img: "", //图片(文件，一般用于二级分类)
         status: 1 //状态1正常2禁用
       };
       this.$refs['formDialog'].resetFields();
+      this.form.img = ""
     },
     ...mapActions({
       getCateList: "cate/getCateListAction"
@@ -211,17 +211,17 @@ export default {
           //console.log(file.get('catename'),'文件')
 
           //调取添加接口
-          getCateAdd(file).then(res => {
-            if (res.data.code == 200) {
-              this.$message.success(res.data.msg);
-              //关闭弹框
-              this.cancel();
-              //重新获取列表
-              this.getCateList();
-            } else {
-              this.$message.error(res.data.msg);
-            }
-          });
+          // getCateAdd(file).then(res => {
+          //   if (res.data.code == 200) {
+          //     this.$message.success(res.data.msg);
+          //     //关闭弹框
+          //     this.cancel();
+          //     //重新获取列表
+          //     this.getCateList();
+          //   } else {
+          //     this.$message.error(res.data.msg);
+          //   }
+          // });
         } else {
           console.log("error submit!!");
           return false;

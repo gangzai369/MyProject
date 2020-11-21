@@ -70,7 +70,7 @@ export default {
           { min: 2, max: 8, message: "长度在 2 到 8 个字符", trigger: "blur" },
         ],
         roleid: [
-          { required: true, message: "请选择所属角色", trigger: "blur" },
+          { required: true, message: "请选择所属规格", trigger: "blur" },
         ],
       },
       //定义一个规格属性数组

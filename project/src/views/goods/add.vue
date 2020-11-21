@@ -75,7 +75,7 @@
             <el-option :value="0" label="请选择" disabled></el-option>
             <!-- 下拉框循环我的菜单列表 -->
             <el-option
-              v-for="item in specsList"
+              v-for="item in toGoods"
               :key="item.id"
               :label="item.specsname"
               :value="item.id"
@@ -195,13 +195,13 @@ export default {
   computed: {
     ...mapGetters({
       cateList: "cate/getCateList",
-      specsList: "specs/getSpecsList",
+      toGoods:"specs/getTogoods"
     }),
   },
   // 为啥必须执行这个函数才能获取到数据
   mounted() {
     this.getCateList();
-    this.getSpecsList();
+    this.getSpecsTogoods();
   },
   props: ["bool"],
   methods: {
@@ -225,14 +225,13 @@ export default {
       // 重置二级id目的
       //进行联动判空。如果你选择了别的一级，那么清空上一次二级的选择值
       if (!n) {
-        console.log("false进来");
         //清空联动二级的双向数据绑定
         this.form.second_cateid = "";
       }
     },
     // 第二个改变事件
     chas(n) {
-      let list = this.specsList;
+      let list = this.toGoods;
       for (let i = 0; i < list.length; i++) {
         if (list[i].id == this.form.specsid) {
           this.myArrs = list[i].attrs;
@@ -266,8 +265,8 @@ export default {
     ...mapActions({
       getCateList: "cate/getCateListAction",
       getGoodsList: "goods/getGoodsListAction",
-      getSpecsList: "specs/getSpecsListAction",
       getGoodsCount: "goods/getCountAction",
+      getSpecsTogoods:"specs/getSpecsTogoods"
     }),
     // 清除事件
     cancel() {
